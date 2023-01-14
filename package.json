@@ -3,13 +3,23 @@
   "version": "0.1.0",
   "description": "Generate a PDF for daily organizer",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
     "jspdf": "^2.5.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^2.8.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node main.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "prettier": {
+    "printWidth": 120,
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
+  }
 }
