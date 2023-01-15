@@ -27,4 +27,7 @@ export default {
     moveToPage(page) {
         doc.setPage(page_indexes[`${page.type}_${page.number}`])
     },
+    linkToPage(page) {
+        return { pageNumber: page_indexes[`${page.type}_${page.number}`] }
+    },
 }
