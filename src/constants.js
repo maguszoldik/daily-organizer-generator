@@ -8,6 +8,8 @@ export const colors = {
     'bg-gray-dark': 80,
     'bg-gray': 140,
     'bg-gray-light': 200,
+    'bg-gray-lighter': 220,
     'text-on-gray-dark': 240,
     'text-gray-dark': 110,
+    'text-gray-darker': 70,
 }
