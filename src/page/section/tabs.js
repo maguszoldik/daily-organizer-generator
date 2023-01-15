@@ -4,6 +4,8 @@ import pager from '../../pager.js'
 import { PAGE_TYPE_QUARTER } from '../quarter.js'
 import { PAGE_TYPE_NOTES_INDEX } from '../notes_index.js'
 import { PAGE_TYPE_YEAR } from '../year.js'
+import { PAGE_TYPE_DAY } from '../day.js'
+import { PAGE_TYPE_NOTE } from '../note.js'
 
 const tabs_y = 2.55
 const tabs_text_y = tabs_y + 7.9
@@ -28,6 +30,9 @@ export const drawTabs = (title, page) => {
      * First tab
      */
     setStyle(page.type === PAGE_TYPE_YEAR && page.number === 1)
+    if ([PAGE_TYPE_DAY, PAGE_TYPE_NOTE].includes(page.type)) {
+        doc.setTextColor(colors['bg-gray'])
+    }
     drawTab({
         x: first_tab_x,
         width: 63,
@@ -64,6 +69,11 @@ export const drawTabs = (title, page) => {
      * tabs bottom line
      */
     doc.line(0, 13.1, WIDTH, 13, 'S')
+
+    if ([PAGE_TYPE_DAY, PAGE_TYPE_NOTE].includes(page.type)) {
+        doc.setFillColor(colors.white)
+        doc.rect(first_tab_x + 0.1, 12, 63 - 0.2, 2, 'F')
+    }
 }
 
 const setStyle = (selected) => {
