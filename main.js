@@ -15,8 +15,8 @@ const DESTINATION = 'build/daily_organizer.pdf'
 pager.addPages(PAGE_TYPE_YEAR, 1)
 pager.addPages(PAGE_TYPE_QUARTER, 4)
 pager.addPages(PAGE_TYPE_DAY, getDaysInYear(new Date(YEAR, 0, 1)))
-pager.addPages(PAGE_TYPE_NOTES_INDEX, 2)
-pager.addPages(PAGE_TYPE_NOTE, 180)
+pager.addPages(PAGE_TYPE_NOTES_INDEX, 3)
+pager.addPages(PAGE_TYPE_NOTE, 3 * 90)
 
 generatePages()
 
