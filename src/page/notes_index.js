@@ -8,7 +8,7 @@ export const PAGE_TYPE_NOTES_INDEX = 'notes_index'
 
 const origin_x = 10
 const origin_y = 20
-const note_space_x = 50
+const note_space_x = 47
 const note_space_y = 6
 const number_per_column = 30
 const number_of_column = 3
