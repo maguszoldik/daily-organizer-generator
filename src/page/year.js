@@ -97,9 +97,10 @@ const drawMonth = (x, y) => (month) => {
                 doc.textWithLink(format(day.date, 'dd'), day_x, day_y, pager.linkToPage(day))
             }
         })
-
-        const line_y = y + 7.25
-        doc.setDrawColor(colors['bg-gray'])
-        doc.line(x - 0.25, line_y, x + 38.25, line_y)
     })
+
+    // line under letters
+    const line_y = y + 7.25
+    doc.setDrawColor(colors['bg-gray'])
+    doc.line(x - 0.25, line_y, x + 38.25, line_y)
 }
