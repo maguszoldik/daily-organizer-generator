@@ -31,7 +31,7 @@ export const drawTabs = (title, page) => {
      */
     setStyle(page.type === PAGE_TYPE_YEAR && page.number === 1)
     if ([PAGE_TYPE_DAY, PAGE_TYPE_NOTE].includes(page.type)) {
-        doc.setTextColor(colors['bg-gray'])
+        doc.setTextColor(colors['text-gray-dark'])
     }
     drawTab({
         x: first_tab_x,

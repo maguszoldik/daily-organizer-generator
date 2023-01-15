@@ -9,4 +9,5 @@ export const colors = {
     'bg-gray': 140,
     'bg-gray-light': 230,
     'text-on-gray-dark': 240,
+    'text-gray-dark': 110,
 }
