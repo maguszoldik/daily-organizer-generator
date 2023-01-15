@@ -7,7 +7,7 @@ export const colors = {
     black: 0,
     'bg-gray-dark': 80,
     'bg-gray': 140,
-    'bg-gray-light': 230,
+    'bg-gray-light': 200,
     'text-on-gray-dark': 240,
     'text-gray-dark': 110,
 }

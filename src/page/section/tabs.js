@@ -75,10 +75,9 @@ export const drawTabs = (title, page) => {
      * tabs bottom line
      */
     doc.line(0, 13.1, WIDTH, 13, 'S')
-
     if ([PAGE_TYPE_DAY, PAGE_TYPE_NOTE].includes(page.type)) {
         doc.setFillColor(colors.white)
-        doc.rect(first_tab_x + 0.1, 12, 63 - 0.2, 2, 'F')
+        doc.rect(first_tab_x + 0.1, 12, 63 - 0.25, 2, 'F')
     }
 }
 
