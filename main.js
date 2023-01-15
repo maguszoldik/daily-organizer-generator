@@ -1,5 +1,11 @@
 import { doc } from './src/doc.js'
-import { generateYearCalendar } from './src/calendar.js'
+import pager from './src/pager.js'
+import { PAGE_TYPE_YEAR } from './src/page/year.js'
+import { PAGE_TYPE_QUARTER } from './src/page/quarter.js'
+import { PAGE_TYPE_DAY } from './src/page/day.js'
+import { PAGE_TYPE_NOTES_INDEX } from './src/page/notes_index.js'
+import { PAGE_TYPE_NOTE } from './src/page/note.js'
+import { generatePages } from './src/generator.js'
 
 const DESTINATION = 'build/daily_organizer.pdf'
 
@@ -29,6 +35,13 @@ const DESTINATION = 'build/daily_organizer.pdf'
 // doc.addPage()
 // doc.addPage()
 
-generateYearCalendar()
+// create structure
+pager.addPages(PAGE_TYPE_YEAR, 1)
+pager.addPages(PAGE_TYPE_QUARTER, 4)
+pager.addPages(PAGE_TYPE_DAY, 365)
+pager.addPages(PAGE_TYPE_NOTES_INDEX, 1)
+pager.addPages(PAGE_TYPE_NOTE, 10)
+
+generatePages()
 
 doc.save(DESTINATION)

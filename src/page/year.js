@@ -1,9 +1,8 @@
-import { doc } from './doc.js'
-import { colors, WIDTH, YEAR } from './constants.js'
+import { doc } from '../doc.js'
+import { colors, WIDTH, YEAR } from '../constants.js'
 
-export const generateYearCalendar = () => {
-    doc.addPage()
-
+export const PAGE_TYPE_YEAR = 'year'
+export const fillPage = (page) => {
     /**
      * Background
      */
