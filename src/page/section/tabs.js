@@ -1,5 +1,5 @@
 import { doc } from '../../doc.js'
-import { colors, WIDTH } from '../../constants.js'
+import { colors, WIDTH, YEAR } from '../../constants.js'
 import pager from '../../pager.js'
 import { PAGE_TYPE_QUARTER } from '../quarter.js'
 import { PAGE_TYPE_NOTES_INDEX } from '../notes_index.js'
@@ -20,6 +20,8 @@ export const drawTabs = (title, page) => {
     doc.setFont('SketchyTimes', 'bold')
     doc.setFontSize(24)
 
+    const is_note_page = page.type === PAGE_TYPE_NOTE
+
     /**
      * Background
      */
@@ -37,7 +39,9 @@ export const drawTabs = (title, page) => {
         x: first_tab_x,
         width: 63,
         text: title,
-        link: pager.linkToPage({ type: PAGE_TYPE_YEAR, number: 1 }),
+        link: is_note_page
+            ? pager.linkToPage({ type: PAGE_TYPE_NOTES_INDEX, number: 1 })
+            : pager.linkToPage({ type: PAGE_TYPE_YEAR, number: 1 }),
     })
 
     /**
@@ -55,14 +59,16 @@ export const drawTabs = (title, page) => {
     })
 
     /**
-     * Notes tab
+     * Notes / 20XX tab
      */
     setStyle(page.type === PAGE_TYPE_NOTES_INDEX && page.number === 1)
     drawTab({
         x: notes_x,
-        width: 21,
-        text: 'Notes',
-        link: pager.linkToPage({ type: PAGE_TYPE_NOTES_INDEX, number: 1 }),
+        width: is_note_page ? 19 : 21,
+        text: is_note_page ? `${YEAR}` : 'Notes',
+        link: is_note_page
+            ? pager.linkToPage({ type: PAGE_TYPE_YEAR, number: 1 })
+            : pager.linkToPage({ type: PAGE_TYPE_NOTES_INDEX, number: 1 }),
     })
 
     /**
