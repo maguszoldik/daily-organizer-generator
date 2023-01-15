@@ -11,8 +11,8 @@ const tabs_y = 2.55
 const tabs_text_y = tabs_y + 7.9
 const tabs_height = 10.5
 const first_tab_x = 8
-const first_quarter_x = 75
-const notes_x = 128
+const first_quarter_x = 74
+const notes_x = 126
 const left_margin = 2
 
 export const drawTabs = (title, page) => {
