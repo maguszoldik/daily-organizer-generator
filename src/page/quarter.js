@@ -6,6 +6,7 @@ import { PAGE_TYPE_DAY } from './day.js'
 import { format, getDay, getMonth, getQuarter, isLastDayOfMonth } from 'date-fns'
 import fr from 'date-fns/locale/fr/index.js'
 import _ from 'lodash'
+import { holidays } from '../holidays.js'
 
 export const PAGE_TYPE_QUARTER = 'quarter'
 
@@ -50,7 +51,7 @@ const drawDay = (month_x, month_y) => (page_day, index) => {
     const day_y = month_y + 8 + index * 5.5
 
     // background
-    doc.setFillColor(DAY_BACKGROUNDS[getDay(page_day.date)])
+    doc.setFillColor(getDayBackground(page_day.date))
     doc.rect(month_x - 1, day_y - 4, 44, 5.4, 'F')
 
     // upper line
@@ -65,6 +66,15 @@ const drawDay = (month_x, month_y) => (page_day, index) => {
     // link
     doc.setFontSize(14)
     doc.textWithLink(format(page_day.date, 'dd EEEEE', { locale: fr }), month_x, day_y, pager.linkToPage(page_day))
+}
+
+const getDayBackground = (date) => {
+    const holiday = holidays.isHoliday(date)
+    if (holiday && holiday.some((h) => h.type === 'public')) {
+        return colors['bg-gray-light']
+    }
+
+    return DAY_BACKGROUNDS[getDay(date)]
 }
 
 const DAY_BACKGROUNDS = [
