@@ -6,6 +6,7 @@ import { PAGE_TYPE_NOTES_INDEX } from '../notes_index.js'
 import { PAGE_TYPE_YEAR } from '../year.js'
 import { PAGE_TYPE_DAY } from '../day.js'
 import { PAGE_TYPE_NOTE } from '../note.js'
+import { getQuarter } from 'date-fns'
 
 const tabs_y = 2.55
 const tabs_text_y = tabs_y + 7.9
@@ -50,6 +51,9 @@ export const drawTabs = (title, page) => {
     const quarters = pager.pages.filter((p) => p.type === PAGE_TYPE_QUARTER).map((p) => p.number)
     quarters.forEach((q) => {
         setStyle(page.type === PAGE_TYPE_QUARTER && page.number === q)
+        if (page.type === PAGE_TYPE_DAY && getQuarter(new Date(YEAR, 0, page.number)) === q) {
+            doc.setFillColor(colors['bg-gray-lighter'])
+        }
         drawTab({
             x: first_quarter_x + (q - 1) * 12,
             width: 13,
