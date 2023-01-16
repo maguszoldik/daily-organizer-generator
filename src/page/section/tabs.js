@@ -1,5 +1,5 @@
 import { doc } from '../../doc.js'
-import { colors, WIDTH, YEAR } from '../../constants.js'
+import { colors, NOTES_PER_INDEX, WIDTH, YEAR } from '../../constants.js'
 import pager from '../../pager.js'
 import { PAGE_TYPE_QUARTER } from '../quarter.js'
 import { PAGE_TYPE_NOTES_INDEX } from '../notes_index.js'
@@ -41,7 +41,7 @@ export const drawTabs = (title, page) => {
         width: 63,
         text: title,
         link: is_note_page
-            ? pager.linkToPage({ type: PAGE_TYPE_NOTES_INDEX, number: 1 })
+            ? pager.linkToPage({ type: PAGE_TYPE_NOTES_INDEX, number: Math.ceil(page.number / NOTES_PER_INDEX) })
             : pager.linkToPage({ type: PAGE_TYPE_YEAR, number: 1 }),
     })
 
