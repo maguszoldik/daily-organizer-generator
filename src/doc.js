@@ -10,6 +10,14 @@ export const doc = new jsPDF({
     putOnlyUsedFonts: true,
 })
 
+doc.setProperties({
+    title: `Agenda & Notes ${YEAR}`,
+    subject: 'Permet de prendre des notes toute l’année',
+    author: 'Nicolas PENCRÉACH',
+    keywords: `agenda, notes, ${YEAR}`,
+    creator: 'Nicolas PENCRÉACH',
+})
+
 // include fonts
 addSketchyTimesFontToDoc(doc)
 addSketchyTimesBoldFontToDoc(doc)
