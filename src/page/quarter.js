@@ -40,7 +40,7 @@ export const fillPage = (page) => {
         const month_x = 10 + index * 47
         const month_y = 22
         doc.setFontSize(22)
-        doc.setTextColor(colors['text-gray-darker'])
+        doc.setTextColor(colors.black)
         doc.text(month.label, month_x, month_y)
 
         month.days.forEach(drawDay(month_x, month_y))
