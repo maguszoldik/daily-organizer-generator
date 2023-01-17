@@ -1,6 +1,6 @@
 import { doc } from '../doc.js'
 import { drawTabs } from './section/tabs.js'
-import { colors, YEAR } from '../constants.js'
+import { COLORS, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
 import { format, getMonth, getQuarter, isLastDayOfMonth } from 'date-fns'
@@ -47,7 +47,7 @@ const drawMonth = (month, index) => {
     const month_x = 10 + index * 47
     const month_y = 22
     doc.setFontSize(22)
-    doc.setTextColor(colors.black)
+    doc.setTextColor(COLORS.black)
     doc.text(month.label, month_x, month_y)
 
     month.days.forEach(drawDay(month_x, month_y))
@@ -61,7 +61,7 @@ const drawDay = (month_x, month_y) => (page_day, index) => {
     doc.rect(month_x - 1, day_y - 4, 44, 5.4, 'F')
 
     // upper line
-    doc.setDrawColor(colors['bg-gray-light'])
+    doc.setDrawColor(COLORS['bg-light'])
     doc.line(month_x - 1, day_y - 4, month_x + 43, day_y - 4)
 
     // bottom line on last day

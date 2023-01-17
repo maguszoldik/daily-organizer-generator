@@ -1,5 +1,5 @@
 import { doc } from '../../doc.js'
-import { colors, NOTES_PER_INDEX, WIDTH, YEAR } from '../../constants.js'
+import { COLORS, NOTES_PER_INDEX, WIDTH, YEAR } from '../../constants.js'
 import pager from '../../pager.js'
 import { PAGE_TYPE_QUARTER } from '../quarter.js'
 import { PAGE_TYPE_NOTES_INDEX } from '../notes_index.js'
@@ -26,7 +26,7 @@ export const drawTabs = (title, page) => {
     /**
      * Background
      */
-    doc.setFillColor(colors['bg-gray-dark'])
+    doc.setFillColor(COLORS['bg-darker'])
     doc.rect(0, 0, WIDTH, 13, 'F')
 
     /**
@@ -34,10 +34,10 @@ export const drawTabs = (title, page) => {
      */
     setTabStyle(page.type === PAGE_TYPE_YEAR && page.number === 1)
     if ([PAGE_TYPE_NOTE].includes(page.type)) {
-        doc.setTextColor(colors['text-gray-dark'])
+        doc.setTextColor(COLORS['text-dark'])
     }
     if ([PAGE_TYPE_DAY].includes(page.type)) {
-        doc.setTextColor(colors['text-gray-darker'])
+        doc.setTextColor(COLORS['text-darker'])
     }
     drawTab({
         x: first_tab_x,
@@ -55,7 +55,7 @@ export const drawTabs = (title, page) => {
     quarters.forEach((q) => {
         setTabStyle(page.type === PAGE_TYPE_QUARTER && page.number === q)
         if (page.type === PAGE_TYPE_DAY && getQuarter(new Date(YEAR, 0, page.number)) === q) {
-            doc.setFillColor(colors['bg-gray-lighter'])
+            doc.setFillColor(COLORS['bg-lighter'])
         }
         drawTab({
             x: first_quarter_x + (q - 1) * 12,
@@ -84,18 +84,18 @@ export const drawTabs = (title, page) => {
     doc.line(0, 13.1, WIDTH, 13, 'S')
     // hacky white rectangle to mask a portion of the line and tab's rect bottom line
     if ([PAGE_TYPE_DAY, PAGE_TYPE_NOTE].includes(page.type)) {
-        doc.setFillColor(colors.white)
+        doc.setFillColor(COLORS.white)
         doc.rect(first_tab_x + 0.1, 12, 63 - 0.25, 2, 'F')
     }
 }
 
 const setTabStyle = (selected) => {
     if (selected) {
-        doc.setFillColor(colors['bg-gray'])
-        doc.setTextColor(colors['text-on-gray-dark'])
+        doc.setFillColor(COLORS['bg-dark'])
+        doc.setTextColor(COLORS['text-lighter'])
     } else {
-        doc.setFillColor(colors.white)
-        doc.setTextColor(colors.black)
+        doc.setFillColor(COLORS.white)
+        doc.setTextColor(COLORS.black)
     }
 }
 

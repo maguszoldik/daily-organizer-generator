@@ -1,6 +1,6 @@
 import { doc } from '../doc.js'
 import { drawTabs } from './section/tabs.js'
-import { colors, NOTES_PER_INDEX, YEAR } from '../constants.js'
+import { COLORS, NOTES_PER_INDEX, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_NOTE } from './note.js'
 
@@ -16,8 +16,8 @@ export const fillPage = (page) => {
     drawTabs(`Calendrier ${YEAR}`, page)
 
     doc.setFontSize(12)
-    doc.setTextColor(colors['text-gray-dark'])
-    doc.setDrawColor(colors['bg-gray-light'])
+    doc.setTextColor(COLORS['text-dark'])
+    doc.setDrawColor(COLORS['bg-light'])
     pager.pages
         .filter(
             (p) =>

@@ -1,6 +1,6 @@
 import { doc } from '../doc.js'
 import { drawTabs } from './section/tabs.js'
-import { colors, YEAR } from '../constants.js'
+import { COLORS, YEAR } from '../constants.js'
 import { format } from 'date-fns'
 import fr from 'date-fns/locale/fr/index.js'
 import _ from 'lodash'
@@ -31,10 +31,10 @@ export const fillPage = (page) => {
 }
 
 const drawTitleBloc = (title, x, y, width) => {
-    doc.setDrawColor(colors.black)
+    doc.setDrawColor(COLORS.black)
     doc.setLineWidth(0.2)
 
-    doc.setFillColor(colors['bg-gray-lighter'])
+    doc.setFillColor(COLORS['bg-lighter'])
     doc.rect(x, y - 0.25, width, 1.25, 'F')
 
     doc.line(x, y - 4, x + width, y - 4)
@@ -47,7 +47,7 @@ const drawBlocOfLines = (number, x, y, width, with_checkbox = false) => {
     const space = 7
     const checkbox_size = 4
 
-    doc.setDrawColor(colors['bg-gray'])
+    doc.setDrawColor(COLORS['bg-dark'])
     for (let i = 0; i < number; i++) {
         const line_y = y + i * space
         doc.line(x, line_y, x + width, line_y, 'S')
@@ -72,7 +72,7 @@ const drawTimeline = () => {
     const line_y = 16
     const line_height = 135
 
-    doc.setDrawColor(colors['bg-gray-dark'])
+    doc.setDrawColor(COLORS['bg-darker'])
     doc.setLineWidth(0.5)
     doc.line(line_x, line_y, line_x, line_y + line_height)
     doc.line(line_x + 1.5, line_y, line_x + 1.5, line_y + line_height)

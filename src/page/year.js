@@ -1,5 +1,5 @@
 import { drawTabs } from './section/tabs.js'
-import { colors, YEAR } from '../constants.js'
+import { COLORS, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
 import { addDays, format, getMonth, getWeekOfMonth } from 'date-fns'
@@ -115,6 +115,6 @@ const drawMonth = (x, y) => (month) => {
 
     // line under letters
     const line_y = y + 7.25
-    doc.setDrawColor(colors['bg-gray'])
+    doc.setDrawColor(COLORS['bg-dark'])
     doc.line(x - 0.25, line_y, x + 38.25, line_y)
 }
