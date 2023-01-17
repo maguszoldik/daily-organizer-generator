@@ -15,10 +15,14 @@ const TRANSLATORS = {
         day_bloc_title_1: () => 'Top priorités',
         day_bloc_title_2: () => 'Autres / Futur',
         day_bloc_title_3: () => 'Notes du jour',
-        day_letter: (date) => format(date, 'EEEEE', { locale: fr }), // First letter of day
-        day_long: (date) => format(date, 'iii dd LLLL', { locale: fr }).split(' ').map(_.upperFirst).join(' '), // Day full name
-        day_short: (date) => format(date, 'dd EEEEE', { locale: fr }), // Number + First letter
-        month_label: (date) => _.upperFirst(format(date, 'MMMM', { locale: fr })), // Month in plain text
+        // First letter of day
+        day_letter: (date) => format(date, 'EEEEE', { locale: fr }),
+        // Day full name
+        day_long: (date) => format(date, 'iii dd LLLL', { locale: fr }).split(' ').map(_.upperFirst).join(' '),
+        // Number + First letter
+        day_short: (date) => format(date, 'dd EEEEE', { locale: fr }),
+        // Month in plain text
+        month_label: (date) => _.upperFirst(format(date, 'MMMM', { locale: fr })),
         notes_tab: () => 'Notes',
         quarter_short_label: (quarter_number) => `T${quarter_number}`,
     },

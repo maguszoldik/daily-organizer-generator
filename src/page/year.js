@@ -1,5 +1,5 @@
 import { drawTabs } from './section/tabs.js'
-import { COLORS, YEAR } from '../constants.js'
+import { COLORS, WEEK_START_ON, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
 import { addDays, format, getMonth, getWeekOfMonth } from 'date-fns'
@@ -8,8 +8,6 @@ import { getDayBackground } from '../holidays.js'
 import translation from '../translation.js'
 
 export const PAGE_TYPE_YEAR = 'year'
-
-const week_start_on = 1 // Monday start
 
 export const fillPage = (page) => {
     drawTabs(translation.getFor('calendar_title'), page)
@@ -40,7 +38,7 @@ const reduceDayPageDataToMonths = (months, p) => {
             weeks: [],
         }
     }
-    const week = getWeekOfMonth(p.date, { weekStartsOn: week_start_on })
+    const week = getWeekOfMonth(p.date, { weekStartsOn: WEEK_START_ON })
     if (!months[month_index].weeks[week]) {
         months[month_index].weeks[week] = {
             week,
@@ -86,7 +84,7 @@ const a_sunday = new Date(2023, 0, 8)
  * @type {string[]}
  */
 const days_letters = [...Array(7)].map((_, i) => {
-    const date = addDays(a_sunday, week_start_on + i)
+    const date = addDays(a_sunday, WEEK_START_ON + i)
     return translation.getDayLetter(date)
 })
 const drawMonth = (x, y) => (month) => {

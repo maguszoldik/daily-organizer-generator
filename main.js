@@ -7,9 +7,7 @@ import { PAGE_TYPE_NOTES_INDEX } from './src/page/notes_index.js'
 import { PAGE_TYPE_NOTE } from './src/page/note.js'
 import { generatePages } from './src/generator.js'
 import { getDaysInYear } from 'date-fns'
-import { NOTES_PER_INDEX, YEAR } from './src/constants.js'
-
-const DESTINATION = 'build/daily_organizer.pdf'
+import { DESTINATION, NOTES_PER_INDEX, YEAR } from './src/constants.js'
 
 // TODO: use config to change locale
 // translation.setLocale('XXX')
