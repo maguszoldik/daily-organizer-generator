@@ -2,7 +2,7 @@ import { drawTabs } from './section/tabs.js'
 import { colors, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
-import { format, getMonth, getWeekOfMonth } from 'date-fns'
+import { addDays, format, getMonth, getWeekOfMonth } from 'date-fns'
 import _ from 'lodash'
 import fr from 'date-fns/locale/fr/index.js'
 import { doc } from '../doc.js'
@@ -11,7 +11,7 @@ import { getDayBackground } from '../holidays.js'
 export const PAGE_TYPE_YEAR = 'year'
 
 const week_start_on = 1 // Monday start
-const days_letters = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
+
 export const fillPage = (page) => {
     drawTabs(`Calendrier ${YEAR}`, page)
 
@@ -80,6 +80,12 @@ const fillMonthWeeks = (month) => {
     return month
 }
 
+const a_sunday = new Date(2023, 0, 8)
+// ['M', 'T', 'W', 'T', 'F', 'S', 'S'] in english
+const days_letters = [...Array(7)].map((_, i) => {
+    const date = addDays(a_sunday, week_start_on + i)
+    return format(date, 'EEEEE', { locale: fr })
+})
 const drawMonth = (x, y) => (month) => {
     const gap = 5.5
 
