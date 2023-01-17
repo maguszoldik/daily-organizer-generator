@@ -3,17 +3,16 @@ import { COLORS, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
 import { addDays, format, getMonth, getWeekOfMonth } from 'date-fns'
-import _ from 'lodash'
-import fr from 'date-fns/locale/fr/index.js'
 import { doc } from '../doc.js'
 import { getDayBackground } from '../holidays.js'
+import translation from '../translation.js'
 
 export const PAGE_TYPE_YEAR = 'year'
 
 const week_start_on = 1 // Monday start
 
 export const fillPage = (page) => {
-    drawTabs(`Calendrier ${YEAR}`, page)
+    drawTabs(translation.getFor('calendar_title'), page)
 
     const months = pager.pages
         .filter((p) => p.type === PAGE_TYPE_DAY)
@@ -37,7 +36,7 @@ const reduceDayPageDataToMonths = (months, p) => {
     const month_index = getMonth(p.date)
     if (!months[month_index]) {
         months[month_index] = {
-            label: _.upperFirst(format(p.date, 'MMMM', { locale: fr })),
+            label: translation.getMonthLabel(p.date),
             weeks: [],
         }
     }
@@ -81,10 +80,14 @@ const fillMonthWeeks = (month) => {
 }
 
 const a_sunday = new Date(2023, 0, 8)
-// ['M', 'T', 'W', 'T', 'F', 'S', 'S'] in english
+
+/**
+ * First letter of each day of a week
+ * @type {string[]}
+ */
 const days_letters = [...Array(7)].map((_, i) => {
     const date = addDays(a_sunday, week_start_on + i)
-    return format(date, 'EEEEE', { locale: fr })
+    return translation.getDayLetter(date)
 })
 const drawMonth = (x, y) => (month) => {
     const gap = 5.5

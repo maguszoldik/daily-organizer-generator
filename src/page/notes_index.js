@@ -1,8 +1,9 @@
 import { doc } from '../doc.js'
 import { drawTabs } from './section/tabs.js'
-import { COLORS, NOTES_PER_INDEX, YEAR } from '../constants.js'
+import { COLORS, NOTES_PER_INDEX } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_NOTE } from './note.js'
+import translation from '../translation.js'
 
 export const PAGE_TYPE_NOTES_INDEX = 'notes_index'
 
@@ -13,7 +14,7 @@ const note_space_y = 6
 const number_per_column = Math.max(Math.floor(NOTES_PER_INDEX / 3), 1)
 
 export const fillPage = (page) => {
-    drawTabs(`Calendrier ${YEAR}`, page)
+    drawTabs(translation.getFor('calendar_title'), page)
 
     doc.setFontSize(12)
     doc.setTextColor(COLORS['text-dark'])

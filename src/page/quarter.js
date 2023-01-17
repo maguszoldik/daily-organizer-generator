@@ -3,15 +3,14 @@ import { drawTabs } from './section/tabs.js'
 import { COLORS, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
-import { format, getMonth, getQuarter, isLastDayOfMonth } from 'date-fns'
-import fr from 'date-fns/locale/fr/index.js'
-import _ from 'lodash'
+import { getMonth, getQuarter, isLastDayOfMonth } from 'date-fns'
 import { getDayBackground } from '../holidays.js'
+import translation from '../translation.js'
 
 export const PAGE_TYPE_QUARTER = 'quarter'
 
 export const fillPage = (page) => {
-    drawTabs(`Calendrier ${YEAR}`, page)
+    drawTabs(translation.getFor('calendar_title'), page)
 
     const months = pager.pages
         .filter((p) => p.type === PAGE_TYPE_DAY)
@@ -33,7 +32,7 @@ const reducePageDataToMonthsForPageQuarter = (page) => (months, p) => {
     const month_index = getMonth(p.date) - 3 * (page.number - 1)
     if (!months[month_index]) {
         months[month_index] = {
-            label: _.upperFirst(format(p.date, 'MMMM', { locale: fr })),
+            label: translation.getMonthLabel(p.date),
             days: [],
         }
     }
@@ -71,5 +70,5 @@ const drawDay = (month_x, month_y) => (page_day, index) => {
 
     // link
     doc.setFontSize(14)
-    doc.textWithLink(format(page_day.date, 'dd EEEEE', { locale: fr }), month_x, day_y, pager.linkToPage(page_day))
+    doc.textWithLink(translation.getDayShort(page_day.date), month_x, day_y, pager.linkToPage(page_day))
 }

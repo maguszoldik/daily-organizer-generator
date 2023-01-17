@@ -1,28 +1,26 @@
 import { doc } from '../doc.js'
 import { drawTabs } from './section/tabs.js'
 import { COLORS, YEAR } from '../constants.js'
-import { format } from 'date-fns'
-import fr from 'date-fns/locale/fr/index.js'
-import _ from 'lodash'
+
+import translation from '../translation.js'
 
 export const PAGE_TYPE_DAY = 'day'
 
 export const fillPage = (page) => {
     const date = new Date(YEAR, 0, page.number)
-    const formatted_date = format(date, 'iii dd LLLL', { locale: fr }).split(' ').map(_.upperFirst).join(' ')
-    drawTabs(formatted_date, page)
+    drawTabs(translation.getLongFormattedDate(date), page)
 
     const first_column_x = 10
     const first_column_width = 55
     doc.setFontSize(16)
 
-    drawTitleBloc('Top priorités', first_column_x, 20, first_column_width)
+    drawTitleBloc(translation.getFor('day_bloc_title_1'), first_column_x, 20, first_column_width)
     drawBlocOfLines(3, first_column_x, 28, first_column_width, true)
 
-    drawTitleBloc('Autres / Futur', first_column_x, 52, first_column_width)
+    drawTitleBloc(translation.getFor('day_bloc_title_2'), first_column_x, 52, first_column_width)
     drawBlocOfLines(10, first_column_x, 60, first_column_width, true)
 
-    drawTitleBloc('Notes du jour', first_column_x, 134, first_column_width)
+    drawTitleBloc(translation.getFor('day_bloc_title_3'), first_column_x, 134, first_column_width)
     drawBlocOfLines(8, first_column_x, 142, first_column_width)
 
     drawTimeline()

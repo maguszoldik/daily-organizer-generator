@@ -7,6 +7,7 @@ import { PAGE_TYPE_YEAR } from '../year.js'
 import { PAGE_TYPE_DAY } from '../day.js'
 import { PAGE_TYPE_NOTE } from '../note.js'
 import { getQuarter } from 'date-fns'
+import translation from '../../translation.js'
 
 const tabs_y = 2.55
 const tabs_text_y = tabs_y + 7.9
@@ -60,7 +61,7 @@ export const drawTabs = (title, page) => {
         drawTab({
             x: first_quarter_x + (q - 1) * 12,
             width: 13,
-            text: `T${q}`,
+            text: translation.getQuarterShortLabel(q),
             link: pager.linkToPage({ type: PAGE_TYPE_QUARTER, number: q }),
         })
     })
@@ -72,7 +73,7 @@ export const drawTabs = (title, page) => {
     drawTab({
         x: notes_x,
         width: is_note_page ? 19 : 21,
-        text: is_note_page ? `${YEAR}` : 'Notes',
+        text: is_note_page ? `${YEAR}` : translation.getFor('notes_tab'),
         link: is_note_page
             ? pager.linkToPage({ type: PAGE_TYPE_YEAR, number: 1 })
             : pager.linkToPage({ type: PAGE_TYPE_NOTES_INDEX, number: 1 }),
