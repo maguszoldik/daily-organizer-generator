@@ -1,8 +1,8 @@
 {
   "name": "daily_organizer",
-  "version": "0.1.0",
-  "description": "Generate a PDF for daily organizer",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "PDF generator for daily organization through a given year",
+  "main": "main.js",
   "type": "module",
   "dependencies": {
     "date-fns": "^2.29.3",
@@ -16,8 +16,8 @@
   "scripts": {
     "generate": "node main.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nicolas PENCRÉACH",
+  "license": "GPL-3.0-only",
   "prettier": {
     "printWidth": 120,
     "trailingComma": "es5",
