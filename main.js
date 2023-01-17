@@ -11,6 +11,9 @@ import { NOTES_PER_INDEX, YEAR } from './src/constants.js'
 
 const DESTINATION = 'build/daily_organizer.pdf'
 
+// TODO: use config to change locale
+// translation.setLocale('XXX')
+
 // create structure
 pager.addPages(PAGE_TYPE_YEAR, 1)
 pager.addPages(PAGE_TYPE_QUARTER, 4)

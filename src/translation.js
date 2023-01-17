@@ -3,7 +3,7 @@ import fr from 'date-fns/locale/fr/index.js'
 import _ from 'lodash'
 import { YEAR } from './constants.js'
 
-// DO NOT MODIFY
+// DO NOT MODIFY, use translation.setLocale('xxx') in main.js to change the currently set language
 const DEFAULT_LOCALE = 'fr'
 
 // Please add more translations and keep "fr" key
