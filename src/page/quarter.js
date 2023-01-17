@@ -15,36 +15,42 @@ export const fillPage = (page) => {
 
     const months = pager.pages
         .filter((p) => p.type === PAGE_TYPE_DAY)
-        .map((p) => {
-            return {
-                ...p,
-                date: new Date(YEAR, 0, p.number),
-            }
-        })
+        .map(appendDateToDayPageData)
         .filter((p) => getQuarter(p.date) === page.number)
-        .reduce((months, p) => {
-            const month_index = getMonth(p.date) - 3 * (page.number - 1)
-            if (!months[month_index]) {
-                months[month_index] = {
-                    label: _.upperFirst(format(p.date, 'MMMM', { locale: fr })),
-                    days: [],
-                }
-            }
+        .reduce(reducePageDataToMonthsForPageQuarter(page), [])
 
-            months[month_index].days.push(p)
+    months.forEach(drawMonth)
+}
 
-            return months
-        }, [])
+const appendDateToDayPageData = (p) => {
+    return {
+        ...p,
+        date: new Date(YEAR, 0, p.number),
+    }
+}
 
-    months.forEach((month, index) => {
-        const month_x = 10 + index * 47
-        const month_y = 22
-        doc.setFontSize(22)
-        doc.setTextColor(colors.black)
-        doc.text(month.label, month_x, month_y)
+const reducePageDataToMonthsForPageQuarter = (page) => (months, p) => {
+    const month_index = getMonth(p.date) - 3 * (page.number - 1)
+    if (!months[month_index]) {
+        months[month_index] = {
+            label: _.upperFirst(format(p.date, 'MMMM', { locale: fr })),
+            days: [],
+        }
+    }
 
-        month.days.forEach(drawDay(month_x, month_y))
-    })
+    months[month_index].days.push(p)
+
+    return months
+}
+
+const drawMonth = (month, index) => {
+    const month_x = 10 + index * 47
+    const month_y = 22
+    doc.setFontSize(22)
+    doc.setTextColor(colors.black)
+    doc.text(month.label, month_x, month_y)
+
+    month.days.forEach(drawDay(month_x, month_y))
 }
 
 const drawDay = (month_x, month_y) => (page_day, index) => {

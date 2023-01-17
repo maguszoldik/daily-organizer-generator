@@ -17,59 +17,67 @@ export const fillPage = (page) => {
 
     const months = pager.pages
         .filter((p) => p.type === PAGE_TYPE_DAY)
-        .map((p) => {
-            return {
-                ...p,
-                date: new Date(YEAR, 0, p.number),
-            }
-        })
-        .reduce((months, p) => {
-            const month_index = getMonth(p.date)
-            if (!months[month_index]) {
-                months[month_index] = {
-                    label: _.upperFirst(format(p.date, 'MMMM', { locale: fr })),
-                    weeks: [],
-                }
-            }
-            const week = getWeekOfMonth(p.date, { weekStartsOn: week_start_on })
-            if (!months[month_index].weeks[week]) {
-                months[month_index].weeks[week] = {
-                    week,
-                    days: [],
-                }
-            }
-
-            months[month_index].weeks[week].days.push(p)
-
-            return months
-        }, [])
-        .map((month) => {
-            // prepend null in first week
-            let to_fill = 7 - month.weeks[1].days.length
-            for (let i = 0; i < to_fill; i++) {
-                month.weeks[1].days.unshift(null)
-            }
-
-            // create the sixth week if no exist
-            if (!month.weeks[6]) {
-                month.weeks[6] = {
-                    week: 6,
-                    days: [],
-                }
-            }
-
-            // append null in sixth week
-            to_fill = 7 - month.weeks[6].days.length
-            for (let i = 0; i < to_fill; i++) {
-                month.weeks[6].days.push(null)
-            }
-
-            return month
-        })
+        .map(appendDateToDayPageData)
+        .reduce(reduceDayPageDataToMonths, [])
+        .map(fillMonthWeeks)
 
     const gap_x = 48
     const gap_y = 45
     months.forEach((month, idx) => drawMonth(10 + gap_x * (idx % 3), 20 + Math.floor(idx / 3) * gap_y)(month))
+}
+
+const appendDateToDayPageData = (p) => {
+    return {
+        ...p,
+        date: new Date(YEAR, 0, p.number),
+    }
+}
+
+const reduceDayPageDataToMonths = (months, p) => {
+    const month_index = getMonth(p.date)
+    if (!months[month_index]) {
+        months[month_index] = {
+            label: _.upperFirst(format(p.date, 'MMMM', { locale: fr })),
+            weeks: [],
+        }
+    }
+    const week = getWeekOfMonth(p.date, { weekStartsOn: week_start_on })
+    if (!months[month_index].weeks[week]) {
+        months[month_index].weeks[week] = {
+            week,
+            days: [],
+        }
+    }
+
+    months[month_index].weeks[week].days.push(p)
+
+    return months
+}
+
+const fillMonthWeeks = (month) => {
+    // Note: weeks[0] is undefined due to getWeekOfMonth usage
+
+    // prepend null in first week
+    let to_fill = 7 - month.weeks[1].days.length
+    for (let i = 0; i < to_fill; i++) {
+        month.weeks[1].days.unshift(null)
+    }
+
+    // create the sixth week if no exist
+    if (!month.weeks[6]) {
+        month.weeks[6] = {
+            week: 6,
+            days: [],
+        }
+    }
+
+    // append null in sixth week
+    to_fill = 7 - month.weeks[6].days.length
+    for (let i = 0; i < to_fill; i++) {
+        month.weeks[6].days.push(null)
+    }
+
+    return month
 }
 
 const drawMonth = (x, y) => (month) => {

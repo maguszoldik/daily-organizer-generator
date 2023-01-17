@@ -8,8 +8,14 @@ import { PAGE_TYPE_NOTE, fillPage as fillNotePage } from './page/note.js'
 import { YEAR } from './constants.js'
 import { format } from 'date-fns'
 
+export const generatePages = () => {
+    generateEmptyPages()
+    generateToc()
+    pager.pages.forEach(fillPage)
+}
+
 const generateEmptyPages = () => {
-    let page_number = 1
+    let page_number = 1 // cover already exists
     pager.pages.forEach((page) => {
         doc.addPage()
         page_number++
@@ -53,23 +59,15 @@ const tocPageTitle = (page, parent = false) => {
     return page.type
 }
 
+const page_fillers = {}
+page_fillers[PAGE_TYPE_YEAR] = fillYearPage
+page_fillers[PAGE_TYPE_QUARTER] = fillQuarterPage
+page_fillers[PAGE_TYPE_DAY] = fillDayPage
+page_fillers[PAGE_TYPE_NOTES_INDEX] = fillNoteIndexPage
+page_fillers[PAGE_TYPE_NOTE] = fillNotePage
 const fillPage = (page) => {
-    const fillers = {}
-
-    fillers[PAGE_TYPE_YEAR] = fillYearPage
-    fillers[PAGE_TYPE_QUARTER] = fillQuarterPage
-    fillers[PAGE_TYPE_DAY] = fillDayPage
-    fillers[PAGE_TYPE_NOTES_INDEX] = fillNoteIndexPage
-    fillers[PAGE_TYPE_NOTE] = fillNotePage
-
-    if (fillers.hasOwnProperty(page.type)) {
+    if (page_fillers.hasOwnProperty(page.type)) {
         pager.moveToPage(page)
-        fillers[page.type](page)
+        page_fillers[page.type](page)
     }
-}
-
-export const generatePages = () => {
-    generateEmptyPages()
-    generateToc()
-    pager.pages.forEach(fillPage)
 }

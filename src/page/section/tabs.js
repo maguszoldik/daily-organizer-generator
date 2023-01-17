@@ -32,7 +32,7 @@ export const drawTabs = (title, page) => {
     /**
      * First tab
      */
-    setStyle(page.type === PAGE_TYPE_YEAR && page.number === 1)
+    setTabStyle(page.type === PAGE_TYPE_YEAR && page.number === 1)
     if ([PAGE_TYPE_NOTE].includes(page.type)) {
         doc.setTextColor(colors['text-gray-dark'])
     }
@@ -53,7 +53,7 @@ export const drawTabs = (title, page) => {
      */
     const quarters = pager.pages.filter((p) => p.type === PAGE_TYPE_QUARTER).map((p) => p.number)
     quarters.forEach((q) => {
-        setStyle(page.type === PAGE_TYPE_QUARTER && page.number === q)
+        setTabStyle(page.type === PAGE_TYPE_QUARTER && page.number === q)
         if (page.type === PAGE_TYPE_DAY && getQuarter(new Date(YEAR, 0, page.number)) === q) {
             doc.setFillColor(colors['bg-gray-lighter'])
         }
@@ -68,7 +68,7 @@ export const drawTabs = (title, page) => {
     /**
      * Notes / 20XX tab
      */
-    setStyle(page.type === PAGE_TYPE_NOTES_INDEX && page.number === 1)
+    setTabStyle(page.type === PAGE_TYPE_NOTES_INDEX && page.number === 1)
     drawTab({
         x: notes_x,
         width: is_note_page ? 19 : 21,
@@ -82,13 +82,14 @@ export const drawTabs = (title, page) => {
      * tabs bottom line
      */
     doc.line(0, 13.1, WIDTH, 13, 'S')
+    // hacky white rectangle to mask a portion of the line and tab's rect bottom line
     if ([PAGE_TYPE_DAY, PAGE_TYPE_NOTE].includes(page.type)) {
         doc.setFillColor(colors.white)
         doc.rect(first_tab_x + 0.1, 12, 63 - 0.25, 2, 'F')
     }
 }
 
-const setStyle = (selected) => {
+const setTabStyle = (selected) => {
     if (selected) {
         doc.setFillColor(colors['bg-gray'])
         doc.setTextColor(colors['text-on-gray-dark'])

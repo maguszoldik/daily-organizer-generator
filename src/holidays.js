@@ -4,7 +4,8 @@ import { getDay } from 'date-fns'
 
 const holidays = new Holidays('FR')
 
-const DAY_BACKGROUNDS = [
+// Index 0 is Sunday
+const DAYS_BACKGROUNDS = [
     colors['bg-gray-lighter'],
     colors.white,
     colors.white,
@@ -14,10 +15,10 @@ const DAY_BACKGROUNDS = [
     colors['bg-gray-lighter'],
 ]
 export const getDayBackground = (date) => {
-    const holiday = holidays.isHoliday(date)
-    if (holiday && holiday.some((h) => h.type === 'public')) {
+    const holidays_found = holidays.isHoliday(date)
+    if (holidays_found && holidays_found.some((h) => h.type === 'public')) {
         return colors['bg-gray-light']
     }
 
-    return DAY_BACKGROUNDS[getDay(date)]
+    return DAYS_BACKGROUNDS[getDay(date)]
 }

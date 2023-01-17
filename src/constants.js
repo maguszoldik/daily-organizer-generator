@@ -1,7 +1,7 @@
 export const WIDTH = 155
 export const HEIGHT = 201
 export const YEAR = 2023
-export const NOTES_PER_INDEX = 90
+export const NOTES_PER_INDEX = 90 // Should be a multiple of 3
 
 export const colors = {
     white: 255,
