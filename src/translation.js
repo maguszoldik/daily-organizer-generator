@@ -15,16 +15,21 @@ const TRANSLATORS = {
         day_bloc_title_1: () => 'Top priorités',
         day_bloc_title_2: () => 'Autres / Futur',
         day_bloc_title_3: () => 'Notes du jour',
-        // First letter of day
         day_letter: (date) => format(date, 'EEEEE', { locale: fr }),
-        // Day full name
         day_long: (date) => format(date, 'iii dd LLLL', { locale: fr }).split(' ').map(_.upperFirst).join(' '),
-        // Number + First letter
         day_short: (date) => format(date, 'dd EEEEE', { locale: fr }),
-        // Month in plain text
+        doc_title: () => `Agenda & Notes ${YEAR}`,
+        doc_subject: () => 'Permet de prendre des notes toute l’année',
+        doc_keywords: () => `agenda, notes, ${YEAR}`,
         month_label: (date) => _.upperFirst(format(date, 'MMMM', { locale: fr })),
         notes_tab: () => 'Notes',
         quarter_short_label: (quarter_number) => `T${quarter_number}`,
+        toc_day_overview: () => 'Agenda quotidien',
+        toc_day: (page_number) => format(new Date(YEAR, 0, page_number), 'dd/MM'),
+        toc_notes_index: (page_number) => `Page ${page_number}`,
+        toc_notes_index_overview: () => 'Aperçus des notes',
+        toc_quarter: () => 'Trimestres',
+        toc_year: () => `Calendrier année ${YEAR}`,
     },
 }
 
@@ -45,6 +50,8 @@ const getMonthLabel = (date) => getTranslator('month_label')(date)
 const getLongFormattedDate = (date) => getTranslator('day_long')(date)
 const getDayShort = (date) => getTranslator('day_short')(date)
 const getDayLetter = (date) => getTranslator('day_letter')(date)
+const getNotePageName = (page_number) => getTranslator('toc_notes_index')(page_number)
+const getDayPageName = (page_number) => getTranslator('toc_day')(page_number)
 
 export default {
     setLocale,
@@ -54,4 +61,6 @@ export default {
     getMonthLabel,
     getDayShort,
     getDayLetter,
+    getNotePageName,
+    getDayPageName,
 }

@@ -5,8 +5,7 @@ import { PAGE_TYPE_QUARTER, fillPage as fillQuarterPage } from './page/quarter.j
 import { PAGE_TYPE_DAY, fillPage as fillDayPage } from './page/day.js'
 import { PAGE_TYPE_NOTES_INDEX, fillPage as fillNoteIndexPage } from './page/notes_index.js'
 import { PAGE_TYPE_NOTE, fillPage as fillNotePage } from './page/note.js'
-import { YEAR } from './constants.js'
-import { format } from 'date-fns'
+import translation from './translation.js'
 
 export const generatePages = () => {
     generateEmptyPages()
@@ -43,13 +42,13 @@ const generateTocForPage = (page) => {
 const shouldCreateOutlineParent = (page) => TYPES_WITH_PARENT.includes(page.type)
 const tocPageTitle = (page, parent = false) => {
     const TITLES = {}
-    TITLES[PAGE_TYPE_YEAR] = `Calendrier année ${YEAR}`
-    TITLES[`parent__${PAGE_TYPE_QUARTER}`] = 'Trimestres'
-    TITLES[PAGE_TYPE_QUARTER] = `T${page.number}`
-    TITLES[`parent__${PAGE_TYPE_DAY}`] = 'Agenda quotidien'
-    TITLES[PAGE_TYPE_DAY] = format(new Date(YEAR, 0, page.number), 'dd/MM')
-    TITLES[`parent__${PAGE_TYPE_NOTES_INDEX}`] = 'Aperçus des notes'
-    TITLES[PAGE_TYPE_NOTES_INDEX] = `Page ${page.number}`
+    TITLES[PAGE_TYPE_YEAR] = translation.getFor('toc_year')
+    TITLES[`parent__${PAGE_TYPE_QUARTER}`] = translation.getFor('toc_quarter')
+    TITLES[PAGE_TYPE_QUARTER] = translation.getQuarterShortLabel(page.number)
+    TITLES[`parent__${PAGE_TYPE_DAY}`] = translation.getFor('toc_day_overview')
+    TITLES[PAGE_TYPE_DAY] = translation.getDayPageName(page.number)
+    TITLES[`parent__${PAGE_TYPE_NOTES_INDEX}`] = translation.getFor('toc_notes_index_overview')
+    TITLES[PAGE_TYPE_NOTES_INDEX] = translation.getNotePageName(page.number)
 
     const index = parent ? `parent__${page.type}` : page.type
     if (TITLES.hasOwnProperty(index)) {

@@ -12,10 +12,10 @@ export const doc = new jsPDF({
 })
 
 doc.setProperties({
-    title: `Agenda & Notes ${YEAR}`,
-    subject: 'Permet de prendre des notes toute l’année',
+    title: translation.getFor('doc_title'),
+    subject: translation.getFor('doc_subject'),
     author: 'Nicolas PENCRÉACH',
-    keywords: `agenda, notes, ${YEAR}`,
+    keywords: translation.getFor('doc_keywords'),
     creator: 'Nicolas PENCRÉACH',
 })
 
