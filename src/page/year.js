@@ -80,14 +80,8 @@ const fillMonthWeeks = (month) => {
 }
 
 const a_sunday = new Date(2023, 0, 8)
-
-/**
- * First letter of each day of a week
- * @type {string[]}
- */
-const days_letters = [...Array(7)].map((_, i) => {
-    const date = addDays(a_sunday, WEEK_START_ON + i)
-    return translation.getDayLetter(date)
+const days_of_week = [...Array(7)].map((_, i) => {
+    return addDays(a_sunday, WEEK_START_ON + i)
 })
 const drawMonth = (x, y) => (month) => {
     const gap = 5.5
@@ -98,8 +92,8 @@ const drawMonth = (x, y) => (month) => {
 
     // days letters
     doc.setFontSize(10)
-    days_letters.forEach((letter, idx) => {
-        doc.text(letter, x + 1.5 + idx * gap, y + gap)
+    days_of_week.forEach((date, idx) => {
+        doc.text(translation.getDayLetter(date), x + 1.5 + idx * gap, y + gap)
     })
 
     // days

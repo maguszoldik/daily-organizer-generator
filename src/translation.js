@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import fr from 'date-fns/locale/fr/index.js'
+import en from 'date-fns/locale/en-GB/index.js'
 import _ from 'lodash'
 import { YEAR } from './constants.js'
 
@@ -31,6 +32,30 @@ const TRANSLATORS = {
         toc_notes_index_overview: () => 'Aperçus des notes',
         toc_quarter: () => 'Trimestres',
         toc_year: () => `Calendrier année ${YEAR}`,
+    },
+    en: {
+        calendar_title: () => `Calendar ${YEAR}`,
+        cover_line1: () => 'Diary',
+        cover_line2: () => '&Notes',
+        day_bloc_title_1: () => 'Top priority',
+        day_bloc_title_2: () => 'Others / Next',
+        day_bloc_title_3: () => 'Day notes',
+        day_letter: (date) => format(date, 'EEEEE', { locale: en }),
+        day_long: (date) => format(date, 'LLLL dd, iii', { locale: en }).split(' ').map(_.upperFirst).join(' '),
+        day_short: (date) => format(date, 'dd EEEEE', { locale: en }),
+        doc_title: () => `Diary & Notes ${YEAR}`,
+        doc_subject: () => 'Keep tracking and notes through the year',
+        doc_keywords: () => `diary, notes, ${YEAR}`,
+        filename: () => `Diary&Notes ${YEAR}.pdf`,
+        month_label: (date) => _.upperFirst(format(date, 'MMMM', { locale: en })),
+        notes_tab: () => 'Notes',
+        quarter_short_label: (quarter_number) => `Q${quarter_number}`,
+        toc_day_overview: () => 'Daily diary',
+        toc_day: (page_number) => format(new Date(YEAR, 0, page_number), 'MM/dd'),
+        toc_notes_index: (page_number) => `Page ${page_number}`,
+        toc_notes_index_overview: () => 'Notes overview',
+        toc_quarter: () => 'Quarters',
+        toc_year: () => `Calendar year ${YEAR}`,
     },
 }
 

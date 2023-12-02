@@ -1,4 +1,4 @@
-import { doc } from './src/doc.js'
+import { doc, addCover } from './src/doc.js'
 import pager from './src/pager.js'
 import { PAGE_TYPE_YEAR } from './src/page/year.js'
 import { PAGE_TYPE_QUARTER } from './src/page/quarter.js'
@@ -11,7 +11,8 @@ import { NOTES_PER_INDEX, YEAR } from './src/constants.js'
 import translation from './src/translation.js'
 
 // TODO: use config to change locale
-// translation.setLocale('XXX')
+// translation.setLocale('en')
+addCover()
 
 // create structure
 pager.addPages(PAGE_TYPE_YEAR, 1)
