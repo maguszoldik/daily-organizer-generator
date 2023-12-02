@@ -7,7 +7,8 @@ import { PAGE_TYPE_NOTES_INDEX } from './src/page/notes_index.js'
 import { PAGE_TYPE_NOTE } from './src/page/note.js'
 import { generatePages } from './src/generator.js'
 import { getDaysInYear } from 'date-fns'
-import { DESTINATION, NOTES_PER_INDEX, YEAR } from './src/constants.js'
+import { NOTES_PER_INDEX, YEAR } from './src/constants.js'
+import translation from './src/translation.js'
 
 // TODO: use config to change locale
 // translation.setLocale('XXX')
@@ -21,4 +22,4 @@ pager.addPages(PAGE_TYPE_NOTE, 3 * NOTES_PER_INDEX)
 
 generatePages()
 
-doc.save(DESTINATION)
+doc.save('build/' + translation.getFor('filename'))

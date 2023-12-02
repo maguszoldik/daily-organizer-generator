@@ -21,6 +21,7 @@ const TRANSLATORS = {
         doc_title: () => `Agenda & Notes ${YEAR}`,
         doc_subject: () => 'Permet de prendre des notes toute l’année',
         doc_keywords: () => `agenda, notes, ${YEAR}`,
+        filename: () => `Agenda&Notes ${YEAR}.pdf`,
         month_label: (date) => _.upperFirst(format(date, 'MMMM', { locale: fr })),
         notes_tab: () => 'Notes',
         quarter_short_label: (quarter_number) => `T${quarter_number}`,
