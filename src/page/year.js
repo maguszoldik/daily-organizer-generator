@@ -2,6 +2,7 @@ import { drawTabs } from './section/tabs.js'
 import { COLORS, WEEK_START_ON, YEAR } from '../constants.js'
 import pager from '../pager.js'
 import { PAGE_TYPE_DAY } from './day.js'
+import { PAGE_TYPE_QUARTER } from './quarter.js'
 import { addDays, format, getMonth, getWeekOfMonth } from 'date-fns'
 import { doc } from '../doc.js'
 import { getDayBackground } from '../holidays.js'
@@ -35,6 +36,7 @@ const reduceDayPageDataToMonths = (months, p) => {
     if (!months[month_index]) {
         months[month_index] = {
             label: translation.getMonthLabel(p.date),
+            quarter: Math.floor(month_index / 3) + 1,
             weeks: [],
         }
     }
@@ -92,7 +94,7 @@ const drawMonth = (x, y) => (month) => {
 
     // label
     doc.setFontSize(14)
-    doc.text(month.label, x, y)
+    doc.textWithLink(month.label, x, y, pager.linkToPage({ type: PAGE_TYPE_QUARTER, number: month.quarter }))
 
     // days letters
     doc.setFontSize(10)
