@@ -1,6 +1,6 @@
 export const WIDTH = 155
 export const HEIGHT = 201
-export const YEAR = 2024
+export const YEAR = 2025
 export const NOTES_PER_INDEX = 90 // Should be a multiple of 3
 export const WEEK_START_ON = 1 // Monday start
 

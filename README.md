@@ -21,17 +21,17 @@ It does just what I need, without extra:
 - Bonus: Table of Contents
 
 It is made for French out of the box, with France holidays in the calendar parts.
-[See the generated file for year 2024](dist/Agenda&Notes%202024.pdf).
+[See the generated file for year 2025](dist/Agenda&Notes%202025.pdf).
 
 Translation is in limited support for now, your contribution is welcomed to improve that.  
-[An english result there, still with French Holidays](dist/Diary&Notes%202024.pdf)
+[An english result there, still with French Holidays](dist/Diary&Notes%202025.pdf)
 
 How to use
 ====
 Requirements
 ----
 You need a properly configured [NVM](https://github.com/nvm-sh/nvm) or at least a node.js instance.  
-This project initially run with node v18.13 (see [.nvmrc](.nvmrc) for current version)
+See [.nvmrc](.nvmrc) for current version.
 
 Like all other npm projects, simply run `nvm use && npm ci` to install dependencies.
 
@@ -42,7 +42,7 @@ Set the correct version of node with `nvm use` if not already done. Then,
 ```
 npm run generate
 ```
-The result will be saved to `build/{filename}.pdf`, with `filename` generated from the translation module.
+The result will be saved to `dist/{filename}.pdf`, with `filename` generated from the translation module.
 
 Contribute
 ====

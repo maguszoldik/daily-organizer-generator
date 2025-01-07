@@ -23,4 +23,4 @@ pager.addPages(PAGE_TYPE_NOTE, 3 * NOTES_PER_INDEX)
 
 generatePages()
 
-doc.save('build/' + translation.getFor('filename'))
+doc.save('dist/' + translation.getFor('filename'))
